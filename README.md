@@ -62,16 +62,16 @@ This is special, basically like a row, but used for shortcodes and includes on o
 ## Staff
 Fields For     | Staff Post    
 -------------- | --------------
-- Name         | - Credentials
-- Role (PT, PTA, Office, ) - **Category** | - Bio
-- Title        | - Featured Image
-- Quote        | - Specialties
-- Clinics (from Locations?) Advanced | - Extra Photos (repeater)
-- Education (repeater) 
+Name         | Credentials
+Role (PT, PTA, Office, )  -**Category** | Bio
+Title        | Featured Image
+Quote        | Specialties
+Clinics (from Locations?) Advanced | Extra Photos (repeater)
+Education (repeater) 
 	- Name
 	- Place 
-| - Professional Affiliations (repeater)
-- Community Service (repeater) | - Patient Testimonials (repeater)
+| Professional Affiliations (repeater)
+Community Service (repeater) | Patient Testimonials (repeater)
 	- Name
 	- Quote
 

@@ -3,7 +3,7 @@
 
 Build a WordPress plugin that includes custom post types and advanced custom fields to create pages and sections (using shortcodes) for these items:
 
-Custom Postypes
+List of | Custom Post Types
 ------------------- | --------------------
 1. Staff | 7. Treatment
 2. Locations | 8. Equipment

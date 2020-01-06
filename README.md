@@ -60,19 +60,46 @@ This is special, basically like a row, but used for shortcodes and includes on o
 - Called by shortcodes or get_template part from liked CPT page template
 
 ## Staff
-Fields For     | Staff Post    
--------------- | --------------
-Name         | Credentials
-Role (PT, PTA, Office, )  -**Category** | Bio
-Title        | Featured Image
-Quote        | Specialties
-Clinics (from Locations?) Advanced | Extra Photos (repeater)
-Education (repeater) 
-	- Name
-	- Place | Professional Affiliations (repeater)
-Community Service (repeater) | Patient Testimonials (repeater)
-	- Name
-	- Quote
+<table>
+	<thead><tr><th colspan="2" >Fields For Staff Post</th></tr></thead>
+	<tbody>
+    	<tr><td colspan="2" >Name</td></tr>
+    	<tr><td colspan="2" >Credentials</td></tr>
+		<tr><td colspan="2">Role (PT, PTA, Office, )  -<strong>Category</strong></td></tr>
+		<tr><td colspan="2">Bio</td></tr>
+		<tr><td colspan="2">Title</td></tr>
+		<tr><td colspan="2">Featured Image</td></tr>
+		<tr><td colspan="2">Quote</td></tr>
+		<tr><td colspan="2">Specialties</td></tr>
+		<tr><td colspan="2">Clinics (from Locations?) Advanced</td></tr>
+		<tr><td colspan="2">Extra Photos (repeater)</td></tr>
+		<tr><td colspan="2">Education (repeater) <ul><li>Name</li><li>PLace</li></ul></td></tr>
+		<tr><td colspan="2">Professional Affiliations (repeater)</td></tr>
+		<tr><td colspan="2">Community Service (repeater) <ul><li>Name</li><li>Quote</li></ul></td></tr>
+		<tr><td colspan="2">Patient Testimonials (repeater)</td></tr>
+        <tr><td align="center" colspan="2"><b>Possible Links</b></td></tr>        
+		<tr><td>Location Page(s)</td><td>Service Page(s) - more like a specialty</td></tr>
+	</tbody>
+</table>
+
+## Location
+<table>
+	<thead><tr><th colspan="3" >Fields For Location Post</th></tr></thead>
+	<tbody>
+    	<tr><td colspan="3">Name</td></tr>
+    	<tr><td colspan="3">Address</td></tr>
+		<tr><td>City</td><td>State</td><td>Zip</td></tr>
+   		<tr><td colspan="3">Phone Number</td></tr>
+        <tr><td colspan="3">Fax Number</td></tr>
+        <tr><td colspan="3">Office Hours (repeater)<ul><li>Day(s)</li><li>Time</li></ul></td></tr>  
+        <tr><td colspan="3">Directions (repeater)<ul><li>From</li><li>Directions</li></ul></td></tr>          
+        <tr><td align="center" colspan="3"><b>Possible Links</b></td></tr>        
+		<tr><td>Staff Page</td><td  colspan="2">Service Page(s) - where it is offered</td></tr>
+	</tbody>
+</table>
+
+
+
 
 ## Resources
 - [Google Doc of requirements for G5 plugin](https://docs.google.com/document/d/1-60UjbCogUZewWsdGaM_1SLtLe6mua6BCpnWS4jskP4/edit?ts=5de6d85c#)

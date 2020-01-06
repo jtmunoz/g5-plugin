@@ -62,10 +62,10 @@ This is special, basically like a row, but used for shortcodes and includes on o
 ## Staff
 Fields         
 -------------- | --------------
-- Name | - Credentials
+- Name         | - Credentials
 - Role (PT, PTA, Office, ) - **Category** | - Bio
-- Title | - Featured Image
-- Quote | - Specialties
+- Title        | - Featured Image
+- Quote        | - Specialties
 - Clinics (from Locations?) Advanced | - Extra Photos (repeater)
 - Education (repeater) 
 	- Name

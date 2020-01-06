@@ -60,7 +60,7 @@ This is special, basically like a row, but used for shortcodes and includes on o
 - Called by shortcodes or get_template part from liked CPT page template
 
 ## Staff
-Fields
+Fields |
 --------------
 - Name | - Credentials
 - Role (PT, PTA, Office, ) - **Category** | - Bio
@@ -74,7 +74,7 @@ Fields
 - Community Service (repeater) | - Patient Testimonials (repeater)
 	- Name
 	- Quote
-	
+
 ## Resources
 - [Google Doc of requirements for G5 plugin](https://docs.google.com/document/d/1-60UjbCogUZewWsdGaM_1SLtLe6mua6BCpnWS4jskP4/edit?ts=5de6d85c#)
 - [https://developer.wordpress.org/plugins/](https://developer.wordpress.org/plugins/)

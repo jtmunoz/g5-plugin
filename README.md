@@ -60,7 +60,7 @@ This is special, basically like a row, but used for shortcodes and includes on o
 - Called by shortcodes or get_template part from liked CPT page template
 
 ## Staff
-Fields         |
+Fields         
 -------------- | --------------
 - Name | - Credentials
 - Role (PT, PTA, Office, ) - **Category** | - Bio

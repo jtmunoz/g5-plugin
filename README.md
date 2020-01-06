@@ -69,8 +69,7 @@ Quote        | Specialties
 Clinics (from Locations?) Advanced | Extra Photos (repeater)
 Education (repeater) 
 	- Name
-	- Place 
-| Professional Affiliations (repeater)
+	- Place | Professional Affiliations (repeater)
 Community Service (repeater) | Patient Testimonials (repeater)
 	- Name
 	- Quote

@@ -26,7 +26,8 @@
             'description'      => __( 'Workshop News and Reviews' ),
             'labels'              => $labels,
             // Features this CPT supports in Post Editor
-            'supports'    => array(  'title', 'revisions', 'page-attributes', 'thumbnail', 'custom-fields', 'post-formats' ),
+            // 'title', 'thumbnail', 
+            'supports'    => array(  'revisions', 'page-attributes',  'custom-fields', 'post-formats' ),
             // You can associate this CPT with a taxonomy or custom taxonomy. 
             'taxonomies'          => array( 'genres' ),
             /* A hierarchical CPT is like Pages and can have

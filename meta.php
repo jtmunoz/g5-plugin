@@ -9,7 +9,7 @@
  */
 
 
-activate_plugin('meta/meta.php');
+// activate_plugin('meta/meta.php');
 
 
 function yoasttobottom() {

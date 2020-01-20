@@ -9,7 +9,7 @@
  */
 
 
-// activate_plugin('meta/meta.php');
+
 
 /*
 // Deactivation Function
@@ -19,6 +19,15 @@ function meta_on_deactivation() {
 }
 register_deactivation_hook(__FILE__, 'meta_on_deactivation' );
 wp_die('Meta Plugin has been Deactivated');
+*/
+
+
+/*
+// Uninstall Function
+function meta_on_uninstal(){
+	if ( !current_user_can('activate_plugins') ) return;
+	//do something
+}
 */
 
 //Moves Yoast to Bottom of Admin UI

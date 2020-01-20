@@ -16,6 +16,7 @@ function meta_on_activation(){
 	//do something
 	wp_die('Meta Plugin has been Activated');
 }
+register_activation_hook(__FILE__, 'meta_on_activation' );
 */
 
 /*
@@ -36,6 +37,7 @@ function meta_on_uninstal(){
 	//do something
 	wp_die('Meta Plugin has been Uninstalled');
 }
+register_uninstall_hook(__FILE__, 'meta_on_uninstall' );
 */
 
 //Moves Yoast to Bottom of Admin UI

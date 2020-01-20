@@ -11,14 +11,13 @@
 
 // activate_plugin('meta/meta.php');
 
-
+//Moves Yoast to Bottom of Admin UI
 function yoasttobottom() {
   return 'low';
 }
-
 add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
 
-include 'workshops.php';
+include 'workshops/workshops.php';
 
 ?>
 

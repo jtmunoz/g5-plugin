@@ -27,7 +27,7 @@
             'labels'              => $labels,
             // Features this CPT supports in Post Editor
             // 'title', 'thumbnail', 
-            'supports'    => array(  'revisions', 'page-attributes',  'custom-fields', 'post-formats' ),
+            'supports'    => array(  'revisions', 'page-attributes',  'custom-fields', 'post-formats', 'thumbnail' ),
             // You can associate this CPT with a taxonomy or custom taxonomy. 
             'taxonomies'          => array( 'genres' ),
             /* A hierarchical CPT is like Pages and can have

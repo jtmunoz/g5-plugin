@@ -8,7 +8,6 @@
  * Author URI: 
  */
 
-
 /*
 // Activation Function
 function meta_on_activation(){
@@ -29,7 +28,6 @@ function meta_on_deactivation() {
 register_deactivation_hook(__FILE__, 'meta_on_deactivation' );
 */
 
-
 /*
 // Uninstall Function
 function meta_on_uninstal(){
@@ -39,6 +37,7 @@ function meta_on_uninstal(){
 }
 register_uninstall_hook(__FILE__, 'meta_on_uninstall' );
 */
+
 
 //Moves Yoast to Bottom of Admin UI
 function yoasttobottom() {

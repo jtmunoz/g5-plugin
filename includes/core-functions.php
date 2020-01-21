@@ -6,8 +6,13 @@
     }
 
     //Prints Readable Date
-	function meta_print_date($date){
-		return strftime('%A,%B,%G', $date);
+	function meta_print_date($workdshop_date){
+		return DateTime::createFromFormat('Ymd', $workdshop_date)->format('M j, Y');		
+	}
+
+	//Prints Readable Time
+	function meta_print_time($workshop_time){
+		return DateTime::createFromFormat('H:i:s', $workshop_time)->format('g:i A');
 	}
 
 	//Moves Yoast to Bottom of Admin UI
@@ -17,4 +22,3 @@
 	add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
 
 
-?>

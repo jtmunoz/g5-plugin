@@ -139,16 +139,20 @@
             $output .= '<div class="uk-panel uk-panel-header uk-panel-box g5-padding g5-border-success g5-background-white g5-boxshadow-medium tm-workshop-panel uk-text-center">
                 <h3 class="uk-panel-title tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3>
                     <div class="uk-panel-teaser tm-workshop-panel-teaser">';
+
                     if ( get_field('workshop_photo') ) {
-                        $output .= '<img src="'.$workshop_fields['workshop_photo'].'" alt="" class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo" >';
+                        // $output .= '<img src="'.$workshop_fields['workshop_photo'].'" alt="" class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo" >';
+                        $output .= wp_get_attachment_image( $image, 'full' );
                     }
+
             $output .= '</div>
                     <div>';
-            $output .= '<p class="uk-margin-small-top tm-workshop-panel-date">'. meta_print_date($workshop_fields['workshop_date']). '</p>';
-            $output .= '<p class="uk-margin-small-top tm-workshop-panel-time">'.$workshop_fields['workshop_time'].'</p>';
+            $output .= '<p class="uk-margin-small-top tm-workshop-panel-date">' . meta_print_date($workshop_fields['workshop_date']) . '</p>';
+            $output .= '<p class="uk-margin-small-top tm-workshop-panel-time">' . meta_print_time($workshop_fields['workshop_time']) . '</p>';          
             if ( get_field('workshop_description') ) {
                $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
             }
+            
             $output .= '</div></div>';
         } else {
             $output = '<h3>Workshop ID not set</h3>';
@@ -273,5 +277,3 @@ add_action( 'admin_action_rd_duplicate_post_as_draft', 'dt_dpp_post_as_draft' );
 
 
 
-
-?>

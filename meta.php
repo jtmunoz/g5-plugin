@@ -49,5 +49,5 @@ register_uninstall_hook(__FILE__, 'meta_on_uninstall' );
 
 include 'workshops/workshops.php';
 
-?>
+
 

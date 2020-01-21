@@ -1,5 +1,8 @@
 <?php 
-
+    // exit if file is called directly
+    if ( ! defined('ABSPATH') ) {
+        exit;
+    }
 
     //activation hook on mulitsite - https://core.trac.wordpress.org/ticket/14170#comment:68
 
@@ -81,12 +84,13 @@
         $defaults['workshop-id'] = __('Workshop ID');
         return $defaults;
     }
+    add_filter('manage_edit-workshop_columns', 'workshops_columns_id', 5);
+  
     function workshops_custom_id_columns($column_name, $id){
         if($column_name === 'workshop-id'){
             echo $id;
         }
     }
-    add_filter('manage_edit-workshop_columns', 'workshops_columns_id', 5);
     add_action('manage_workshop_posts_custom_column', 'workshops_custom_id_columns', 5, 2);
 
     /* ADDS MODIFIED COLUMN TO WORKSHOPS */
@@ -140,7 +144,7 @@
                     }
             $output .= '</div>
                     <div>';
-            $output .= '<p class="uk-margin-small-top tm-workshop-panel-date">'.$workshop_fields['workshop_date'].'</p>';
+            $output .= '<p class="uk-margin-small-top tm-workshop-panel-date">'. meta_print_date($workshop_fields['workshop_date']). '</p>';
             $output .= '<p class="uk-margin-small-top tm-workshop-panel-time">'.$workshop_fields['workshop_time'].'</p>';
             if ( get_field('workshop_description') ) {
                $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
@@ -149,7 +153,6 @@
         } else {
             $output = '<h3>Workshop ID not set</h3>';
         }
-
         return $output;
     }
     add_shortcode('workshop','meta_workshop');

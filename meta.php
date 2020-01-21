@@ -8,6 +8,13 @@
  * Author URI: 
  */
 
+// exit if file is called directly
+if ( ! defined('ABSPATH') ) {
+	exit;
+}
+
+require_once plugin_dir_path(__FILE__) . 'includes/core-functions.php';
+
 /*
 // Activation Function
 function meta_on_activation(){
@@ -39,11 +46,6 @@ register_uninstall_hook(__FILE__, 'meta_on_uninstall' );
 */
 
 
-//Moves Yoast to Bottom of Admin UI
-function yoasttobottom() {
-  return 'low';
-}
-add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
 
 include 'workshops/workshops.php';
 

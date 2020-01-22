@@ -1,5 +1,8 @@
 <?php 
-
+    // exit if file is called directly
+    if ( ! defined('ABSPATH') ) {
+        exit;
+    }
 
     //activation hook on mulitsite - https://core.trac.wordpress.org/ticket/14170#comment:68
 
@@ -27,7 +30,7 @@
             'labels'              => $labels,
             // Features this CPT supports in Post Editor
             // 'title', 'thumbnail', 
-            'supports'    => array(  'revisions', 'page-attributes',  'custom-fields', 'post-formats' ),
+            'supports'    => array( 'title', 'revisions', 'page-attributes',  'custom-fields', 'post-formats' ),
             // You can associate this CPT with a taxonomy or custom taxonomy. 
             'taxonomies'          => array( 'genres' ),
             /* A hierarchical CPT is like Pages and can have
@@ -81,12 +84,13 @@
         $defaults['workshop-id'] = __('Workshop ID');
         return $defaults;
     }
+    add_filter('manage_edit-workshop_columns', 'workshops_columns_id', 5);
+  
     function workshops_custom_id_columns($column_name, $id){
         if($column_name === 'workshop-id'){
             echo $id;
         }
     }
-    add_filter('manage_edit-workshop_columns', 'workshops_columns_id', 5);
     add_action('manage_workshop_posts_custom_column', 'workshops_custom_id_columns', 5, 2);
 
     /* ADDS MODIFIED COLUMN TO WORKSHOPS */
@@ -133,15 +137,17 @@
         $workshop_fields = get_fields($attr['id'], false);
         if ( $workshop_fields ) {
             $output .= '<div class="uk-panel uk-panel-header uk-panel-box g5-padding g5-border-success g5-background-white g5-boxshadow-medium tm-workshop-panel uk-text-center">
-                <h3 class="uk-panel-title tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3>
-                    <div class="uk-panel-teaser tm-workshop-panel-teaser">';
-                    if ( get_field('workshop_photo') ) {
-                        $output .= '<img src="'.$workshop_fields['workshop_photo'].'" alt="" class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo" >';
+                <h3 class="tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3>
+                    <div class="g5-padding uk-panel-teaser tm-workshop-panel-teaser">';
+                    $size = 'large'; // (thumbnail, medium, large, full or custom size)
+                    $attr = 'class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo"';
+                    if( $workshop_fields['workshop_photo'] ) {
+                        $output .= wp_get_attachment_image($workshop_fields['workshop_photo'], $size, false, $attr);
                     }
             $output .= '</div>
                     <div>';
-            $output .= '<p class="uk-margin-small-top tm-workshop-panel-date">'.$workshop_fields['workshop_date'].'</p>';
-            $output .= '<p class="uk-margin-small-top tm-workshop-panel-time">'.$workshop_fields['workshop_time'].'</p>';
+            $output .= '<p class="uk-margin-small-top uk-text-large tm-workshop-panel-date">' . meta_print_date($workshop_fields['workshop_date']) . '</p>';
+            $output .= '<p class="uk-margin-small-top tm-workshop-panel-time">' . meta_print_time($workshop_fields['workshop_time']) . '</p>';          
             if ( get_field('workshop_description') ) {
                $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
             }
@@ -149,7 +155,6 @@
         } else {
             $output = '<h3>Workshop ID not set</h3>';
         }
-
         return $output;
     }
     add_shortcode('workshop','meta_workshop');
@@ -270,5 +275,3 @@ add_action( 'admin_action_rd_duplicate_post_as_draft', 'dt_dpp_post_as_draft' );
 
 
 
-
-?>

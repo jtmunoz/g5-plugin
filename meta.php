@@ -16,10 +16,10 @@ if ( ! defined('ABSPATH') ) {
 }
 
 
-
-// define( 'META_PATH', plugin_dir_path( __FILE__ ) );
-// include( META_PATH . 'includes/acf/include_acf.php');
+define( 'META_PATH', plugin_dir_path( __FILE__ ) );
+include( META_PATH . 'includes/acf/include_acf.php');
 require_once plugin_dir_path(__FILE__) . 'includes/acf/include_acf.php';
+
 
 require_once plugin_dir_path(__FILE__) . 'includes/core-functions.php';
 

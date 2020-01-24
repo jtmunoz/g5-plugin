@@ -58,25 +58,30 @@
     }
     add_action( 'init', 'custom_post_workshop', 0 );
 
-         
+    //Removes Content Editor from Workshop
+    function remove_workshop_content_editor () {
+        remove_post_type_support( 'workshop', 'editor' );
+    }
+    add_action('init', 'remove_workshop_content_editor');
+
     /* Hook into the 'init' action so that the function
     * Containing our post type registration is not 
     * unnecessarily executed. 
     */
     /* SET WORKSHOP TITLE */    
-    function auto_generate_workshop_title($title) {
-        global $post;
-        if (isset($post->ID)) {
-            if (empty($_POST['post_title']) && 'workshop' == get_post_type($post->ID)){
-                // get the current post ID number
-                $id = get_the_ID();
-                // add ID number with order strong
-                $title = 'workshop-'.$id;
-            } 
-        }
-        return $title; 
-    }
-    add_filter('title_save_pre','auto_generate_workshop_title');
+    // function auto_generate_workshop_title($title) {
+    //     global $post;
+    //     if (isset($post->ID)) {
+    //         if (empty($_POST['post_title']) && 'workshop' == get_post_type($post->ID)){
+    //             // get the current post ID number
+    //             $id = get_the_ID();
+    //             // add ID number with order strong
+    //             $title = 'workshop-'.$id;
+    //         } 
+    //     }
+    //     return $title; 
+    // }
+    // add_filter('title_save_pre','auto_generate_workshop_title');
 
     
     /* ADD WORKSHOP ID COLUMN TO ADMIN UI */

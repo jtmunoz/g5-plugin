@@ -25,7 +25,6 @@ require_once plugin_dir_path(__FILE__) . 'includes/core-functions.php';
 include plugin_dir_path(__FILE__) . 'admin/security.php';
 include plugin_dir_path(__FILE__) . 'admin/security-uninstall.php';
 
-include plugin_dir_path(__FILE__) . 'uninstall.php';
 
 require 'workshops/workshops.php';
 

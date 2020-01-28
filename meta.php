@@ -22,7 +22,8 @@ require_once plugin_dir_path(__FILE__) . 'includes/acf/include_acf.php';
 
 
 require_once plugin_dir_path(__FILE__) . 'includes/core-functions.php';
-require_once plugin_dir_path(__FILE__) . 'includes/security-uninstall.php';
+include plugin_dir_path(__FILE__) . 'admin/security.php';
+include plugin_dir_path(__FILE__) . 'admin/security-uninstall.php';
 
 
 require 'workshops/workshops.php';

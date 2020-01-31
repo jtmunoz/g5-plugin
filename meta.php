@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Meta
  * Plugin URI: 
- * Description: A create custom post types.
+ * Description: A plugin to create custom post types.
  * Version: 1.0
  * Author: Jordan Muñoz
  * Author URI: 

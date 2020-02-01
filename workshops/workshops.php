@@ -43,6 +43,7 @@
             'show_in_menu'        => true,
             'show_in_nav_menus'   => true,
             'show_in_admin_bar'   => true,
+            'show_in_rest'        => true,
             'menu_position'       => 5,
             'can_export'          => true,
             'has_archive'         => true,
@@ -59,10 +60,10 @@
     add_action( 'init', 'custom_post_workshop', 0 );
 
     //Removes Content Editor from Workshop
-    function remove_workshop_content_editor () {
-        remove_post_type_support( 'workshop', 'editor' );
-    }
-    add_action('init', 'remove_workshop_content_editor');
+    // function remove_workshop_content_editor () {
+    //     remove_post_type_support( 'workshop', 'editor' );
+    // }
+    // add_action('init', 'remove_workshop_content_editor');
 
     /* Hook into the 'init' action so that the function
     * Containing our post type registration is not 
@@ -103,7 +104,7 @@
         $columns['modified']    = 'Last Modified';
         return $columns;
     }
-    add_filter ( 'manage_edit-workshop_columns', 'add_modified_workshop_columns',  );
+    add_filter ( 'manage_edit-workshop_columns', 'add_modified_workshop_columns', 5, 2);
 
     /* ADD LAST MODIFIED COLUMN DATA  */
     function view_workshop_edit_column( $column, $post_id ) {
@@ -137,31 +138,47 @@
 
 
     /* SHORTCODE FOR SINGLE WORKSHIOP */
-    function meta_workshop($attr){
-        $output = '';
-        $workshop_fields = get_fields($attr['id'], false);
-        if ( $workshop_fields ) {
-            $output .= '<div class="uk-panel uk-panel-header uk-panel-box g5-padding g5-border-success g5-background-white g5-boxshadow-medium tm-workshop-panel uk-text-center">
-                <h3 class="tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3>
-                    <div class="g5-padding uk-panel-teaser tm-workshop-panel-teaser">';
-                    $size = 'large'; // (thumbnail, medium, large, full or custom size)
-                    $attr = 'class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo"';
-                    if( $workshop_fields['workshop_photo'] ) {
-                        $output .= wp_get_attachment_image($workshop_fields['workshop_photo'], $size, false, $attr);
-                    }
-            $output .= '</div>
-                    <div>';
-            $output .= '<p class="uk-margin-small-top uk-text-large tm-workshop-panel-date">' . meta_print_date($workshop_fields['workshop_date']) . '</p>';
-            $output .= '<p class="uk-margin-small-top tm-workshop-panel-time">' . meta_print_time($workshop_fields['workshop_time']) . '</p>';          
-            if ( get_field('workshop_description') ) {
-               $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
-            }
-            $output .= '</div></div>';
-        } else {
-            $output = '<h3>Workshop ID not set</h3>';
+function meta_workshop($attr){
+    $output = '';
+    $workshop_fields = array();
+    if(isset($attr['id'])) {
+        $id = $attr['id'];
+        // if(count($attr)>1){
+        //     unset($attr['id']);
+        //     // foreach($attr as $key=>$value){
+        //     //  $$key=$value
+        //     // }
+        // }
+        $workshop_fields = get_fields($id, false);
+
+        // pass fields to Workshp class
+        $output = '<div class="uk-panel uk-panel-header uk-panel-box g5-padding g5-border-success g5-background-white g5-boxshadow-medium tm-workshop-panel uk-text-center"><h3 class="tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3><div class="g5-padding uk-panel-teaser uk-margin-bottom-remove tm-workshop-panel-teaser">';
+        if( $workshop_fields['workshop_photo'] ) {
+            $size = 'large';
+            $attributes = 'class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo"';
+            $output .= wp_get_attachment_image($workshop_fields['workshop_photo'], $size, false, $attributes);
         }
-        return $output;
+        $output .= '</div><div><p class="uk-margin-top-remove  uk-text-h3 tm-workshop-panel-date">' . meta_print_date($workshop_fields['workshop_date']) . '</p><p class="uk-margin-small-top uk-h3 tm-workshop-panel-time">' . meta_print_time($workshop_fields['workshop_time']) . '</p>';
+        if ( get_field('workshop_description') ) {
+            $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
+        }
+        $args = array( 'p' => $id, 'post_type' => 'workshop' );
+        $workshop_query = new WP_Query($args); 
+        if ( $workshop_query->have_posts() ) {
+            while ( $workshop_query->have_posts() ) {
+                $workshop_query->the_post() ;
+                $output .= '<p><a href="'.get_permalink(the_ID()).'" class="uk-button uk-button-success g5-transition-half">View the Workshop</a></p>';
+            } 
+        }
+        $output .= '</div></div>';
+    } else {
+        $output = '<h3>Workshop ID not set</h3>';
     }
+
+    return $output;               
+}
+
+
     add_shortcode('workshop','meta_workshop');
 
 

@@ -1,8 +1,6 @@
 <?php 
 
-	// if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	// 	exit;
-	// }
+	if (!defined( 'WP_UNINSTALL_PLUGIN' )) exit;
 
 	// if (  current_user_can( 'activate_plugins' ) ) {
 	// 	return;

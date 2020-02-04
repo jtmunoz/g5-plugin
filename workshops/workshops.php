@@ -140,65 +140,56 @@
     function meta_workshop($attr){
         $output = '';
         $workshop_fields = '';
-                if(isset($attr['id'])){
-          $id=$attr['id'];
-          unset($attr['id']);
-          $workshop_fields = get_fields($id, false);
-          // pass fields to Workshp class 
-          $output = '<div class="uk-panel uk-panel-header uk-panel-box g5-padding g5-border-success g5-background-white g5-boxshadow-medium tm-workshop-panel uk-text-center"><h3 class="tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3><div class="g5-padding uk-panel-teaser uk-margin-bottom-remove tm-workshop-panel-teaser">';
-          if( $workshop_fields['workshop_photo'] ) {
-            $size = 'large';
-            $attributes = 'class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo"';
-            $output .= wp_get_attachment_image($workshop_fields['workshop_photo'], $size, false, $attributes);
-          }
-          $output .= '</div><div><p class="uk-margin-top-remove  uk-text-h3 tm-workshop-panel-date">' . meta_print_date($workshop_fields['workshop_date']) . '</p><p class="uk-margin-small-top uk-h3 tm-workshop-panel-time">' . meta_print_time($workshop_fields['workshop_time']) . '</p>';
-          if ( get_field('workshop_description') ) {
-            $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
-          }
-          $args = array( 'p' => $id, 'post_type' => 'workshop' );
-          $workshop_query = new WP_Query($args); 
-          if ( $workshop_query->have_posts() ) {
-            while ( $workshop_query->have_posts() ) {
-              $workshop_query->the_post() ;
-              $output .= '<p><a href="'.get_permalink(the_ID()).'" class="uk-button uk-button-success g5-transition-half">View the Workshop</a></p>';
-            } 
-          }
-          $output .= '</div></div>';
+        if(isset($attr['id'])){
+            $id=$attr['id'];
+            unset($attr['id']);
+            $workshop_fields = get_fields($id, false);
+            // pass fields to Workshp class 
+            $output = '<div class="uk-panel uk-panel-header uk-panel-box g5-padding g5-border-success g5-background-white g5-boxshadow-medium tm-workshop-panel uk-text-center"><h3 class="tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3><div class="g5-padding uk-panel-teaser uk-margin-bottom-remove tm-workshop-panel-teaser">';
+
+            if( $workshop_fields['workshop_photo'] ) {
+                $size = 'large';
+                $attributes = 'class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo"';
+                $output .= wp_get_attachment_image($workshop_fields['workshop_photo'], $size, false, $attributes);
+            }
+            
+            $output .= '</div><div><p class="uk-margin-top-remove  uk-text-h3 tm-workshop-panel-date">' . meta_print_date($workshop_fields['workshop_date']) . '</p><p class="uk-margin-small-top uk-h3 tm-workshop-panel-time">' . meta_print_time($workshop_fields['workshop_time']) . '</p>';
+            
+            if ( get_field('workshop_description') ) {
+                $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
+            }
+
+            $args = array( 'p' => $id, 'post_type' => 'workshop' );
+            $workshop_query = new WP_Query($args); 
+            if ( $workshop_query->have_posts() ) {
+                while ( $workshop_query->have_posts() ) {
+                    $workshop_query->the_post() ;
+                    $output .= '<p><a href="'.get_permalink(the_ID()).'" class="uk-button uk-button-success g5-transition-half">View the Workshop</a></p>';
+                } 
+            }
+            $output .= '</div></div>';
         } else {
           $output = '<h3>Workshop ID not set</h3>';
         }
-
         return $output;      
     }
+    add_shortcode('workshop','meta_workshop');
 
 
-        add_shortcode('workshop','meta_workshop');
-
-
-
-
-
-
-
-
-
-
-
-    function rd_duplicate_post_link( $actions, $post ) {
+    // Duplicate Workshop Post link
+    function workshop_duplicate_post_link( $actions, $post ) {
 
         //print_r($actions);
         //if (current_user_can('edit_posts') || $post->post_type=='movies') {
-        $actions['duplicate'] = '<a href="' . wp_nonce_url('admin.php?action=rd_duplicate_post_as_draft&post=' . $post->ID, basename(__FILE__), 'duplicate_nonce' ) . '" title="Duplicate this item" rel="permalink">Duplicate</a>';
+        $actions['duplicate'] = '<a href="' . wp_nonce_url('admin.php?action=workshop_duplicate_post_as_draft&post=' . $post->ID, basename(__FILE__), 'duplicate_nonce' ) . '" title="Duplicate this item" rel="permalink">Duplicate</a>';
         // }
         return $actions;
     }
-    add_filter('page_row_actions', 'rd_duplicate_post_link', 10, 2);
+    add_filter('page_row_actions', 'workshop_duplicate_post_link', 10, 2);
 
 
-
-    add_action( 'admin_action_rd_duplicate_post_as_draft', 'dt_dpp_post_as_draft' ); 
-
-    function dt_dpp_post_as_draft() {
+    // Duplicate Workshop Post
+    function wokrhsop_duplicate_post_as_draft() {
         global $wpdb;
 
         /*sanitize_GET POST REQUEST*/
@@ -211,7 +202,7 @@
         $post_status = !empty($opt['dpp_post_status']) ? $opt['dpp_post_status'] : 'draft';
         $redirectit = !empty($opt['dpp_post_redirect']) ? $opt['dpp_post_redirect'] : 'to_list';
 
-        if (! ( isset( $get_copy ) || isset( $post_copy ) || ( isset($request_copy) && 'dt_dpp_post_as_draft' == $request_copy ) ) ) {
+        if (! ( isset( $get_copy ) || isset( $post_copy ) || ( isset($request_copy) && 'wokrhsop_duplicate_post_as_draft' == $request_copy ) ) ) {
             wp_die('No post!');
         }
 
@@ -277,9 +268,9 @@
             else { 
                 wp_redirect( admin_url( 'edit.php'.$returnpage ) );
             }
-        
             // exit;
         } else {
             wp_die('Error! Post creation failed: ' . $post_id);
         }
     }
+    add_action( 'admin_action_workshop_duplicate_post_as_draft', 'wokrhsop_duplicate_post_as_draft' ); 

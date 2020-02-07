@@ -4,6 +4,7 @@
         exit;
     }
 
+    require_once 'class-workshop.php';
     //activation hook on mulitsite - https://core.trac.wordpress.org/ticket/14170#comment:68
 
     function custom_post_workshop() {
@@ -138,38 +139,13 @@
 
     // Adds Shortcode for workshop
     function meta_workshop($attr){
+
         $output = '';
-        $workshop_fields = '';
-        if(isset($attr['id'])){
-            $id=$attr['id'];
-            unset($attr['id']);
-            $workshop_fields = get_fields($id, false);
-            // pass fields to Workshp class 
-            $output = '<div class="uk-panel uk-panel-header uk-panel-box g5-padding g5-border-success g5-background-white g5-boxshadow-medium tm-workshop-panel uk-text-center"><h3 class="tm-workshop-panel-title">'.$workshop_fields['workshop_name'].'</h3><div class="g5-padding uk-panel-teaser uk-margin-bottom-remove tm-workshop-panel-teaser">';
-
-            if( $workshop_fields['workshop_photo'] ) {
-                $size = 'large';
-                $attributes = 'class="uk-align-center g5-padding-small-all g5-border-small g5-border-primary g5-boxshadow-all-small uk-border-rounded tm-workshop-panel-photo"';
-                $output .= wp_get_attachment_image($workshop_fields['workshop_photo'], $size, false, $attributes);
-            }
-            
-            $output .= '</div><div><p class="uk-margin-top-remove  uk-text-h3 tm-workshop-panel-date">' . meta_print_date($workshop_fields['workshop_date']) . '</p><p class="uk-margin-small-top uk-h3 tm-workshop-panel-time">' . meta_print_time($workshop_fields['workshop_time']) . '</p>';
-            
-            if ( get_field('workshop_description') ) {
-                $output .= '<p class="tm-workshop-panel-description">'.$workshop_fields['workshop_description'].'</p>';
-            }
-
-            $args = array( 'p' => $id, 'post_type' => 'workshop' );
-            $workshop_query = new WP_Query($args); 
-            if ( $workshop_query->have_posts() ) {
-                while ( $workshop_query->have_posts() ) {
-                    $workshop_query->the_post() ;
-                    $output .= '<p><a href="'.get_permalink(the_ID()).'" class="uk-button uk-button-success g5-transition-half">View the Workshop</a></p>';
-                } 
-            }
-            $output .= '</div></div>';
+        $workshop = new Workshop($attr);
+        if ( $workshop ) {
+            $output = $workshop->printSingleWorkshop();
         } else {
-          $output = '<h3>Workshop ID not set</h3>';
+            $output = '<h3>Workshop Class not Initialized</h3>';
         }
         return $output;      
     }

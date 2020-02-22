@@ -27,8 +27,8 @@ include plugin_dir_path(__FILE__) . 'admin/security-uninstall.php';
 
 
 require 'workshops/workshops.php';
-
-
+require 'locations/locations.php';
+require 'staff/staff.php';
 
 
 
